@@ -105,7 +105,7 @@ void decision_thread_create(){
         exit(EXIT_FAILURE); 
     }
 }
-void loaction_thread_create(int argc, char *argv[])
+void* loaction_thread_func(void *arg)   //子线程：决策函数
 {
     band_cpu(2);
     Urg_func urg_demo;
@@ -113,9 +113,18 @@ void loaction_thread_create(int argc, char *argv[])
     {        
 	char *a[2];
 	a[1]=(char *)"-e";
-        urg_demo.get_position(2, a);//printf("get_position\r\n");
+        urg_demo.get_position(2, a);printf("get_position\r\n");
         //把信号量加1
         sem_post(&locat_sem);
+    }
+}
+void loaction_thread_create()
+{
+   pthread_t thread;
+    //创建线程，并把Position作为线程函数的参数 
+    if(pthread_create(&thread, NULL, loaction_thread_func, NULL) != 0) { 
+        perror("pthread_create failed\n"); 
+        exit(EXIT_FAILURE); 
     }
 }
 
@@ -128,8 +137,8 @@ int main(int argc, char *argv[])
     /*CAN发送线程*/
     can_snd_thread_create();
     /*定位线程*/
-    loaction_thread_create(argc, argv);
-    //can_recv_create();
+    loaction_thread_create();
+    can_recv_create();
     
     // kinectv2_get_picture_demo();    //kinect demo
     //清理信号量
