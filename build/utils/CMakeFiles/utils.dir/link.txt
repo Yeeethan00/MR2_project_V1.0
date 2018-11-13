@@ -1,2 +1,0 @@
-/usr/bin/ar qc libutils.a  CMakeFiles/utils.dir/band_cpu.c.o CMakeFiles/utils.dir/sem.cpp.o
-/usr/bin/ranlib libutils.a
