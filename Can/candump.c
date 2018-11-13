@@ -213,6 +213,7 @@ int canrecv(char **argv)
 	struct timeval timeout, timeout_config = { 0, 0 }, *timeout_current = NULL;
 
 /*START*/
+/*
 	int nbytes_1;                                //socket套接字和发送字节数目
 	struct can_frame frame_1;                       //接收数据的buffer
 /*END*/
@@ -647,6 +648,7 @@ int canrecv(char **argv)
 				nbytes = recvmsg(s[i], &msg, 0);    //读取数据
 				idx = idx2dindex(addr.can_ifindex, s[i]);
 /*START*/
+/*
 				nbytes_1 = read(s[i], &frame_1, sizeof(frame_1));       //接收报文//显示报文 
 				if(nbytes_1 > 0) { 
 					printf("ID=0x%X DLC=%d data[0]=0x%X\n", frame_1.can_id, frame_1.can_dlc, frame_1.data[0]); 
@@ -814,7 +816,7 @@ int canrecv(char **argv)
 
 				printf("%s  ", (color==1)?col_off:"");
 
-				fprint_long_canframe(stdout, &frame, NULL, view, maxdlen);
+				fprint_long_canframe(stdout, &frame, NULL, view, maxdlen);//进入打印
 
 				printf("%s", (color>1)?col_off:"");
 				printf("\n");

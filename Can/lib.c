@@ -301,6 +301,7 @@ void fprint_long_canframe(FILE *stream , struct canfd_frame *cf, char *eol, int 
 
 	sprint_long_canframe(buf, cf, view, maxdlen);
 	fprintf(stream, "%s", buf);
+//ID三位时：DATA[0]=buf[11]   ID=buf[0]buf[1]buf[2]
 	if ((view & CANLIB_VIEW_ERROR) && (cf->can_id & CAN_ERR_FLAG)) {
 		snprintf_can_error_frame(buf, sizeof(buf), cf, "\n\t");
 		fprintf(stream, "\n\t%s", buf);
