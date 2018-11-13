@@ -14,7 +14,7 @@ using namespace qrk;
 static float Pose_high[2]={5360,43480};
 static float Pose_mid[2]={400,43480};
 static float Pose_low[2]={2390,43480};
-float Position[2]={0,1};
+float Position[2]={0,0};
 
 void Urg_func::print_data(const vector<long>& data, long time_stamp)
 {

@@ -16,12 +16,6 @@ extern "C" {
 #define PI 3.1415926535
 #define LOOP_NUM 100
 
-#define MR2_L 0.6
-#define MR2_W 0.3
-
-#define L1 0.25
-#define L2 0.25
-#define HIP_HEIGHT 0.35
 typedef enum Leg_type{
     LF=0,
     RF,

@@ -14,6 +14,7 @@ INCLUDE_DIRECTORIES( ${freenect2_INCLUDE_DIR} ${PCL_INCLUDE_DIRS} ${OpenCV_INCLU
 link_directories( ${PCL_LIBRARY_DIRS} ) 
 add_definitions( ${PCL_DEFINITIONS} )
 
+add_subdirectory(Users)
 add_subdirectory(Hokuyo_urg)
 add_subdirectory(KinectV2)
 add_subdirectory(Limbs)
@@ -24,7 +25,7 @@ set(SRCS main.cpp)
 
 add_executable(MR2_project_V1 ${SRCS})
 
-target_link_libraries(MR2_project_V1 hokuyo_urg kinectv2 limbs ${freenect2_LIBRARIES} ${OpenCV_LIBS} pthread can utils)
+target_link_libraries(MR2_project_V1 users hokuyo_urg kinectv2 limbs ${freenect2_LIBRARIES} ${OpenCV_LIBS} pthread can utils)
 
 
 
