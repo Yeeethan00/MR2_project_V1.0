@@ -1,2 +1,0 @@
-/usr/bin/ar qc libkinectv2.a  CMakeFiles/kinectv2.dir/KinectV2_func.cpp.o
-/usr/bin/ranlib libkinectv2.a

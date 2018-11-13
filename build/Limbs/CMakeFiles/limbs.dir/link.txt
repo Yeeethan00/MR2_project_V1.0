@@ -1,2 +1,0 @@
-/usr/bin/ar qc liblimbs.a  CMakeFiles/limbs.dir/limbs.cpp.o
-/usr/bin/ranlib liblimbs.a
