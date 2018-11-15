@@ -65,7 +65,7 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
 
     /*执行*/
     char *msg = (char *)"123#1122334455667788";
-    handle(msg);
+    //handle(msg);
     usleep(100000);
 /*
     if(leg->leg_type==LF)

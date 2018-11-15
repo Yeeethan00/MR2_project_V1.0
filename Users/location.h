@@ -16,10 +16,10 @@
 #include <sched.h>
 #include "../Hokuyo_urg/Urg_func.h"
 #include "../KinectV2/KinectV2_func.h"
-#include "../utils/sem.h"
+#include "../Utils/sem.h"
 extern "C" {
 #include "../Can/can.h"
-#include "../utils/band_cpu.h"
+#include "../Utils/band_cpu.h"
 }
 
 void loaction_thread_create();

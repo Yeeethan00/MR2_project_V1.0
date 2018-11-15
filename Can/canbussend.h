@@ -17,7 +17,7 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
-#include "../utils/band_cpu.h"
+#include "../Utils/band_cpu.h"
 
 int canbussend(void *arg);
 
