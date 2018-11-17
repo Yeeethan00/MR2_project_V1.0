@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "gui_main.h"
+
 int gui_main()//(int argc, char *argv[])
 {
     char *az[2];int d;

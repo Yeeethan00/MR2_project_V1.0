@@ -8,6 +8,8 @@
 #ifndef _SEM_H
 #define _SEM_H
 #include <semaphore.h>
+extern double GUI_show_data;
+extern double GUI_show_data_1;
 extern int finish_flag;
 extern float Position[2];
 extern sem_t locat_sem;//定位信号量，阻塞决策线程判断位置

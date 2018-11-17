@@ -7,6 +7,5 @@
 
 #ifndef _GUI_MAIN_H
 #define _GUI_MAIN_H
-
 int gui_main();//(int argc, char *argv[]);
 #endif

@@ -11,6 +11,8 @@
 #include "sem.h"
 using namespace std;
 int finish_flag=0;
+double GUI_show_data=0;
+double GUI_show_data_1=0;
 sem_t locat_sem;//定位信号量，阻塞决策线程判断位置
 void sem_all_init(){
     //初始化信号量，其初值为0 

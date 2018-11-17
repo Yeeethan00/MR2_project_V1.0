@@ -15,13 +15,13 @@
 QT_CHARTS_USE_NAMESPACE
 QChart *m_chart;
 QLineSeries *m_series;
+QLineSeries *m_series_1;
 //QList<double> dataList;//存储业务数据
 int maxSize = 5000;
-
 //QTimer updateTimer;
 int timeId;
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),//默认初始化？
+    QMainWindow(parent),//默认初始化
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
@@ -40,6 +40,16 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     m_series->setUseOpenGL(true);//openGl 加速
     qDebug()<<m_series->useOpenGL();
+printf("ser\r\n");
+    m_series_1 = new QLineSeries;
+    m_chart->addSeries(m_series_1);
+
+    for(int i=0;i<maxSize;++i){
+       m_series_1->append(i,0);
+    }
+    m_series_1->setUseOpenGL(true);//openGl 加速
+    qDebug()<<m_series_1->useOpenGL();
+
 
     QValueAxis *axisX = new QValueAxis;
     axisX->setRange(0,maxSize);
@@ -47,11 +57,13 @@ MainWindow::MainWindow(QWidget *parent) :
     axisX->setTitleText("axisX");
 
     QValueAxis *axisY = new QValueAxis;
-    axisY->setRange(-1.5,1.5);
+    axisY->setRange(-3.14,3.14);
     axisY->setTitleText("axisY");
 
     m_chart->setAxisX(axisX,m_series);
     m_chart->setAxisY(axisY,m_series);
+    m_chart->setAxisX(axisX,m_series_1);
+    m_chart->setAxisY(axisY,m_series_1);
     m_chart->legend()->hide();
     m_chart->setTitle("demo");
 
@@ -60,14 +72,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //    connect(&updateTimer,SIGNAL(timeout()),this,SLOT(updatedataSlot()));
 //    updateTimer.start(0);
-    timeId = startTimer(30);
+    timeId = startTimer(10);
 }
 
 
 double MainWindow::getData(double time){
 
-    double s = qCos( time * M_PI * 2 ) ;
-    return s;
+    //double s = qCos( time * M_PI * 2 ) ;
+    return GUI_show_data;
+}
+
+double MainWindow::getData_1(double time){
+
+    //double s = qCos( time * M_PI * 2 ) ;
+    return GUI_show_data_1;
 }
 
 void MainWindow::timerEvent(QTimerEvent *event){
@@ -81,7 +99,6 @@ void MainWindow::timerEvent(QTimerEvent *event){
         if(isVisible()){
             QVector<QPointF> oldPoints = m_series->pointsVector();//Returns the points in the series as a vector
             QVector<QPointF> points;
-
             for(int i=size;i<oldPoints.count();++i){
                 points.append(QPointF(i-size ,oldPoints.at(i).y()));//替换数据用
             }
@@ -91,6 +108,19 @@ void MainWindow::timerEvent(QTimerEvent *event){
                 //qDebug()<<getData((((double)lastpointtime+k+1)/1000));
             }
             m_series->replace(points);
+
+   	    QVector<QPointF> oldPoints_1 = m_series_1->pointsVector();//Returns the points in the series as a vector
+            QVector<QPointF> points_1;
+	    for(int i=size;i<oldPoints_1.count();++i){
+                points_1.append(QPointF(i-size ,oldPoints_1.at(i).y()));//替换数据用
+            }
+            qint64 sizePoints_1 = points_1.count();
+            for(int k=0;k<size;++k){
+                points_1.append(QPointF(k+sizePoints_1,getData_1((((double)lastpointtime+k+1)/1000))));
+                //qDebug()<<getData((((double)lastpointtime+k+1)/1000));
+            }
+            m_series_1->replace(points_1);
+
             lastpointtime = eltime;
        }
     }

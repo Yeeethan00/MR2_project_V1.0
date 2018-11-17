@@ -64,12 +64,15 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
     track2states(leg);
 
     /*执行*/
+        
     char *msg = (char *)"123#1122334455667788";
     //handle(msg);
-    usleep(100000);
-/*
+    usleep(1000);
+
     if(leg->leg_type==LF)
     {
+        GUI_show_data=(double)leg->angle_hip;
+        GUI_show_data_1=(double)leg->angle_knee;
         printf("x: %lf, y %lf , z:%lf\n", leg->track_x,leg->track_y,leg->track_z);
         printf("leg_type:%d  angle:%lf  %lf  %lf \n",leg->leg_type,leg->angle_hip_side,leg->angle_hip,leg->angle_knee);
 
@@ -92,7 +95,7 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
         printf("leg_type:%d  angle:%lf  %lf  %lf \n",leg->leg_type,leg->angle_hip_side,leg->angle_hip,leg->angle_knee);
 
     }
-    */
+  
 }
 
 void Limbs::Limbs_move(double stepSize, double height, double angle_turn)

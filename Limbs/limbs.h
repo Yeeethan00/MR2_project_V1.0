@@ -9,12 +9,13 @@
 #include<iostream>
 #include<stdio.h>
 #include<math.h>
+#include "../Utils/sem.h"
 extern "C" {
 #include "../Can/can.h"
 }
 
 #define PI 3.1415926535
-#define LOOP_NUM 100
+#define LOOP_NUM 400
 
 typedef enum Leg_type{
     LF=0,
@@ -41,7 +42,7 @@ class Limbs
     private:
         Leg_states leg_LF, leg_LB, leg_RF, leg_RB;
         
-        //
+
         void track2states(Leg_states *leg);
         void leg_control(Leg_states *leg, double tim ,double stepSize, double height, double angle_alpha, int leg_dir);
     public:

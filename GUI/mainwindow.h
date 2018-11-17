@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "../Utils/sem.h"
 namespace Ui {
 class MainWindow;
 }
@@ -19,6 +19,7 @@ protected:
 private:
     Ui::MainWindow *ui;
     double getData(double time);
+    double getData_1(double time);
 
 };
 
