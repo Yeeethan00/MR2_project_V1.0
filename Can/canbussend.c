@@ -132,7 +132,7 @@ int canbus_send(char *interface,char *snd_msg)
 		return 1;
 	}
 
-	//close(s);                                                   //关闭套接字
+	close(s);                                                   //关闭套接字
 
 	return 0;
 }

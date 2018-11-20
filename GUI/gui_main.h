@@ -7,5 +7,10 @@
 
 #ifndef _GUI_MAIN_H
 #define _GUI_MAIN_H
-int gui_main();//(int argc, char *argv[]);
+#include "../Utils/sem.h"
+extern "C" {
+#include "../Utils/band_cpu.h"
+}
+
+void gui_thread_create();
 #endif

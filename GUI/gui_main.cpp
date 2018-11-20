@@ -2,9 +2,9 @@
 #include <QApplication>
 #include "gui_main.h"
 
-int gui_main()//(int argc, char *argv[])
+int gui_main()
 {
-    char *az[2];int d;
+    char *az[2];int d=0;
     az[1]=(char *)"";
     QApplication a((int&)d, az);
     MainWindow w;
@@ -12,3 +12,17 @@ int gui_main()//(int argc, char *argv[])
 
     return a.exec();
 }
+void* gui_thread_func(void *arg)//(int argc, char *argv[])
+{
+    gui_main();
+}
+void gui_thread_create()
+{
+   pthread_t thread;
+    //创建线程，并把NULL作为线程函数的参数 
+    if(pthread_create(&thread, NULL, gui_thread_func, NULL) != 0) { 
+        perror("pthread_create failed\n"); 
+        exit(EXIT_FAILURE); 
+    }
+}
+

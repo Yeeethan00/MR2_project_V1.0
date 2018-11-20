@@ -24,9 +24,10 @@ int main(int argc, char *argv[])
     can_snd_thread_create();
     /*定位线程*/
     loaction_thread_create();
+    /*示波线程*/
+    gui_thread_create();
     /*CAN接收*/
     can_recv_create();
-    gui_main();
     // kinectv2_get_picture_demo();    //kinect demo
     //清理信号量
     sem_all_destory();
