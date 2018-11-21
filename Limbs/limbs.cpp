@@ -18,23 +18,22 @@ typedef union{
     int in[2];
     double dou;
 }int2_to_double;
-
 void can_double2char(double dou, char *ch)
  {
  	int2_to_double un;		
  	un.dou=dou;
-	printf("%x\r\n",un.in[0]);printf("%x\r\n",un.in[1]);
  	for(int i=1;i<3;i++)
  	{
- 		for(int j=1;j<9;j++)
+ 		for(int j=1;j<9;j=j+2)
  		{
- 			int temp=((un.in[i-1]>>(64-4*j))&0x0000000f);
- 			if(temp<10)	ch[8*(i-1)+(j-1)+4]=temp+48;
-			else	ch[8*(i-1)+(j-1)+4]=temp+87;
-			cout<<8*(i-1)+(j-1)+4<<":"<<ch[8*(i-1)+(j-1)+4]<<' ';
+ 			int temp=((un.in[2-i]>>(64-4*j))&0x0000000f);
+ 			if(temp<10)	ch[27-8*i-j]=temp+48;
+			else	ch[27-8*i-j]=temp+87;
+			int temp_1=((un.in[2-i]>>(64-4*(j+1)))&0x0000000f);
+			if(temp_1<10)	ch[28-8*i-j]=temp_1+48;
+			else	ch[28-8*i-j]=temp_1+87;
 		}
 	}
-	
  }
 
 Limbs::Limbs()
@@ -87,8 +86,6 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
     track2states(leg);
 
     /*执行*/
-    //char *msg = (char *)"123#1122334455667788";
-
     if(leg->leg_type==LF)
     {
         printf("x: %lf, y %lf , z:%lf\n", leg->track_x,leg->track_y,leg->track_z);
