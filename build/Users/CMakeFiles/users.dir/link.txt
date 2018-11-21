@@ -1,2 +1,0 @@
-/usr/bin/ar qc libusers.a  CMakeFiles/users.dir/location.cpp.o CMakeFiles/users.dir/decision.cpp.o CMakeFiles/users.dir/users_automoc.cpp.o
-/usr/bin/ranlib libusers.a
