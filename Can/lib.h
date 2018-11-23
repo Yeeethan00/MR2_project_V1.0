@@ -45,6 +45,7 @@
 #define CAN_UTILS_LIB_H
 
 #include <stdio.h>
+#include "../Utils/sem.h"
 
 /* buffer sizes for CAN frame string representations */
 

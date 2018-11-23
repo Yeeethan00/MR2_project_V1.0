@@ -293,7 +293,68 @@ void sprint_canframe(char *buf , struct canfd_frame *cf, int sep, int maxdlen) {
 
 	buf[offset] = 0;
 }
+/*MY CODES START*/
+/*************************************************************************
+	> File Name: tt.cpp
+	> Author: 
+	> Mail: 
+	> Created Time: 2018年11月22日 星期四 20时11分37秒
+ ************************************************************************/
 
+#include <stdio.h>
+#include <string.h>
+typedef union{
+   char ch[8];
+   double in;
+}char8_to_double;
+char8_to_double can_rcv_double;
+/* 返回ch字符在sign数组中的序号 */
+int getIndexOfSigns(char ch)
+{
+    if(ch >= '0' && ch <= '9')
+    {
+        return ch - '0';
+    }
+    if(ch >= 'A' && ch <='F') 
+    {
+        return ch - 'A' + 10;
+    }
+    if(ch >= 'a' && ch <= 'f')
+    {
+        return ch - 'a' + 10;
+    }
+    return -1;
+}
+/* 十六进制数转换为十进制数 */
+long hexToDec(char *source,int len)
+{
+    long sum = 0;
+    long t = 1;
+    int i;
+    for(i=len-1; i>=0; i--)
+    {
+        sum += t * getIndexOfSigns(*(source + i));
+        t *= 16;
+    }  
+ 
+    return sum;
+}
+
+int can_get_double() 
+{
+    char buf[]={'0','0','1',' ',' ',' ','[','8',']',' ',' ','0','0',' ','0','0',' ','0','0',' ','0','0',' ','0','0',' ','0','0',' ','2','8',' ','4','0'};
+    char hex[8][2];
+    for(int cnt=0; cnt<8; cnt++)
+    {
+    	hex[cnt][0]=buf[11+3*cnt];hex[cnt][1]=buf[12+3*cnt];
+    	int len=(int)(sizeof(hex[cnt])/sizeof(char));
+    	printf("16进制数：\t%c%c\n", hex[cnt][0],hex[cnt][1]);
+    	printf("%d 10进制数：\t%ld\n",cnt, hexToDec(hex[cnt], len));
+	can_rcv_double.ch[cnt]=hexToDec(hex[cnt], len);
+    }
+    return 0;
+}
+/*MY CODES END*/
 void fprint_long_canframe(FILE *stream , struct canfd_frame *cf, char *eol, int view, int maxdlen) {
 	/* documentation see lib.h */
 
@@ -302,6 +363,11 @@ void fprint_long_canframe(FILE *stream , struct canfd_frame *cf, char *eol, int 
 	sprint_long_canframe(buf, cf, view, maxdlen);
 	fprintf(stream, "%s", buf);
 //ID三位时：DATA[0]=buf[11]   ID=buf[0]buf[1]buf[2]
+	/*MY CODES START*/
+	can_get_double();
+	printf("%lf", can_rcv_double.in);
+	GUI_show_data_1=(double)can_rcv_double.in;
+	/*MY CODES END*/
 	if ((view & CANLIB_VIEW_ERROR) && (cf->can_id & CAN_ERR_FLAG)) {
 		snprintf_can_error_frame(buf, sizeof(buf), cf, "\n\t");
 		fprintf(stream, "\n\t%s", buf);

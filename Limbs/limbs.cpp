@@ -95,7 +95,6 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
     if(leg->leg_type==RF)
     {
 	GUI_show_data=(double)leg->angle_hip;
-  	GUI_show_data_1=(double)leg->angle_knee;
 	char msg_hip_side[20] ={'0','0','3','#'};
         can_double2char((double)leg->angle_hip_side, msg_hip_side);
         handle(msg_hip_side);
