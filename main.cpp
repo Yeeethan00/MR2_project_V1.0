@@ -31,7 +31,6 @@ using namespace qrk;
     //while(1){;}//测试进程
     //删除信号量
     sem_all_destory();
-    exit(EXIT_SUCCESS);
     return 0;
 }
 
