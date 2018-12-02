@@ -30,7 +30,7 @@ MR2Scan2Point::MR2Scan2Point()
 	}
 }
 
-void MR2Scan2Point::filter(int len, double rate)//¹ýÂËÉ¢µã,len²»ÒË¹ý´ó 
+void MR2Scan2Point::filter(int len, double rate)//ï¿½ï¿½ï¿½ï¿½É¢ï¿½ï¿½,lenï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ 
 {
 	int lastPtr = searchRange_min;
 	int curPtr = searchRange_min;
@@ -123,7 +123,7 @@ void MR2Scan2Point::computePro(Sign &sign, int posNum)
 {
 	double innerProduct = 0;
 	double mode1 = 0, mode2 = 0;
-	int alpha = 130, beta = 1, gamma = 1;//Èý¸ö²ÎÊýµÄÈ¨Öµ 
+	int alpha = 130, beta = 1, gamma = 1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨Öµ 
 	for(int i = 0; i < posNum; i++)
 	{
 		innerProduct += alpha * alpha * lastSign.pointLen[i] * sign.pointLen[i];
@@ -228,7 +228,7 @@ int MR2Scan2Point::Renew_Lastpos()
 			minDis = disRange_min;
 		}
 	}
-	/*//Êä³öÈ«²¿²éÕÒ½á¹û 
+	/*//ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Ò½ï¿½ï¿½ 
 	for(int i = 0; i < DEPTH_MAX; i++)
 	{
 		
@@ -241,7 +241,7 @@ int MR2Scan2Point::Renew_Lastpos()
 		}
 		cout<<endl;
 	}*/
-	//Ñ°ÕÒ¿ÉÄÜÐÔ×î´óµÄµã²¢Êä³ö£»
+	//Ñ°ï¿½Ò¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äµã²¢ï¿½ï¿½ï¿½ï¿½ï¿½
 	int found = 0;
 	double max = -1;
 	for(int i = 0; i < cnt; i++)
@@ -252,20 +252,22 @@ int MR2Scan2Point::Renew_Lastpos()
 			found = i;
 		}
 	}
-	if(max <= 0) //Èç¹ûÃ»ÓÐÕÒµ½ 
+	if(max <= 0) //ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Òµï¿½ 
 	{
 		return -1;
 	}
 	
-	lastSign = memory[found];//¸³Öµ 
-	//Êä³ö²éÕÒ½á¹û 	
+	lastSign = memory[found];//ï¿½ï¿½Öµ 
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò½ï¿½ï¿½
+	/*
 	cout<<"p = "<<lastSign.p<<endl;
 	for(int j = 0; j < 3; j++)
 	{
 		cout<<"LEN= "<<lastSign.pointLen[j]<<" ";
 		cout<<"DIS= "<<lastSign.distance[j]<<" ";
 		cout<<"ANG= "<<lastSign.angle[j]<<" ";
-	}	
+	}
+	 */
 	return 1;
 } 
 void MR2Scan2Point::Init_Lastpos(int posLen[3], long distance[3], int angle[3])

@@ -15,7 +15,7 @@
 #include <semaphore.h>
 #include <sched.h>
 #include "../Hokuyo_urg/Urg_func.h"
-#include "../KinectV2/KinectV2_func.h"
+//#include "../KinectV2/KinectV2_func.h"
 #include "../Utils/sem.h"
 extern "C" {
 #include "../Can/can.h"

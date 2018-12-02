@@ -138,6 +138,7 @@ for(int j = 0; j < data.size(); ++j)
 	float r_high=d;
    	float r_mid=e;
     float r_low=f;
+    cout<<"r_high: "<<r_high;cout<<"  r_mid: "<<r_mid;cout<<"  r_low: "<<r_low<<endl;
     /*计算位置*/
     float Point_x_1=0.5*((r_high*r_high-r_mid*r_mid)/(Pose_mid[0]-Pose_high[0])+Pose_mid[0]+Pose_high[0]);
     float Point_y_1=Pose_high[1]-sqrt(r_high*r_high-(Point_x_1-Pose_high[0])*(Point_x_1-Pose_high[0]));
@@ -150,7 +151,7 @@ for(int j = 0; j < data.size(); ++j)
     
     Position[0]=(Point_x_1+Point_x_2+Point_x_3)/3;
     Position[1]=(Point_y_1+Point_y_2+Point_y_3)/3;
-    cout<<"POS:["<<Position[0]<<","<<Position[1]<<"]"<<endl;
+    //cout<<"POS:["<<Position[0]<<","<<Position[1]<<"]"<<endl;
     }
 
 #if defined(URG_MSC)

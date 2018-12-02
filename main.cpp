@@ -2,7 +2,7 @@
 	> File Name: main.cpp
 	> Author: yi rongjie
 	> Mail: yirj0809@gmail.com
-	> Created Time: 2018Äê10ÔÂ25ÈÕ ĞÇÆÚËÄ 09Ê±26·Ö26Ãë 
+	> Created Time: 2018ï¿½ï¿½10ï¿½ï¿½25ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 09Ê±26ï¿½ï¿½26ï¿½ï¿½ 
 ************************************************************************/
 #include "Users/decision.h"
 #include "Users/location.h"
@@ -13,23 +13,23 @@ extern "C" {
 using namespace std;
 using namespace qrk;
 
-int main(int argc, char *argv[])
+ int main(int argc, char *argv[])
 {
     printf("start\r\n");
-    //³õÊ¼»¯ĞÅºÅÁ¿
+    //åˆå§‹åŒ–ä¿¡å·é‡
     sem_all_init();
-    /*¾ö²ßÏß³Ì*/
-    decision_thread_create();
-    /*CAN·¢ËÍÏß³Ì*/
+    /*CANå‘é€çº¿ç¨‹*/
     can_snd_thread_create();
-    /*¶¨Î»Ïß³Ì*/
+    /*å®šä½çº¿ç¨‹*/
     loaction_thread_create();
-    /*Ê¾²¨Ïß³Ì*/
+    /*ç¤ºæ³¢çº¿ç¨‹*/
     gui_thread_create();
-    /*CAN½ÓÊÕ*/
+    /*å†³ç­–çº¿ç¨‹*/
+    decision_thread_create();
+    /*CANæ¥æ”¶*/
     can_recv_create();
-    // kinectv2_get_picture_demo();    //kinect demo
-    //ÇåÀíĞÅºÅÁ¿
+    //while(1){;}//æµ‹è¯•è¿›ç¨‹
+    //åˆ é™¤ä¿¡å·é‡
     sem_all_destory();
     exit(EXIT_SUCCESS);
     return 0;

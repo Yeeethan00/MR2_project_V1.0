@@ -18,20 +18,18 @@ FIND_PACKAGE(Qt5OpenGL REQUIRED)
 qt5_wrap_cpp( MOC mainwindow.h) 
 qt5_wrap_ui( UIC mainwindow.ui) 
 
-set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} $ENV{HOME}/freenect2/lib/cmake/freenect2 ) 
-find_package(freenect2 REQUIRED) 
-find_package(PCL 1.7 REQUIRED) 
-find_package(OpenCV REQUIRED) 
-find_package(Eigen3 REQUIRED)
+#set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} $ENV{HOME}/freenect2/lib/cmake/freenect2 ) 
+#find_package(freenect2 REQUIRED) 
+#find_package(PCL 1.7 REQUIRED) 
+#find_package(OpenCV REQUIRED) 
+#find_package(Eigen3 REQUIRED)
 
-include_directories("/usr/include/libusb-1.0/") 
-include_directories( ${freenect2_INCLUDE_DIR} ${PCL_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS}) 
-#include_directories( ${Qt5Charts_INCLUDE_DIR} ${Qt5Widgets_INCLUDE_DIRS} ${Qt5Gui_INCLUDE_DIRS} ${Qt5Core_INCLUDE_DIRS} ${Qt5OpenGL_INCLUDE_DIRS})
-#include_directories("./GUI/")
+#include_directories("/usr/include/libusb-1.0/") 
+#include_directories( ${freenect2_INCLUDE_DIR} ${PCL_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS}) 
 
-link_directories( ${PCL_LIBRARY_DIRS} ) 
+#link_directories( ${PCL_LIBRARY_DIRS} ) 
 
-add_definitions( ${PCL_DEFINITIONS} )
+#add_definitions( ${PCL_DEFINITIONS} )
 
 add_subdirectory(Users)
 add_subdirectory(Hokuyo_urg)
@@ -44,7 +42,8 @@ add_subdirectory(GUI)
 add_executable(MR2_project_V1 ${SRCS} ./GUI/gui_main.cpp ./GUI/gui_main.h ./GUI/mainwindow.cpp ./GUI/mainwindow.h ./GUI/mainwindow.ui ${RESOURCE_DIR})
 
 target_link_libraries(MR2_project_V1 ${freenect2_LIBRARIES} ${OpenCV_LIBS} 
-				     users hokuyo_urg kinectv2 limbs pthread can utils #gui 
+				     users hokuyo_urg #kinectv2 
+			             limbs pthread can utils #gui 
 				     Qt5::Widgets  Qt5::Charts  Qt5::Gui  Qt5::Core  Qt5::OpenGL)
 
 include(CheckCXXCompilerFlag)

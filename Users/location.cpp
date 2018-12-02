@@ -17,7 +17,7 @@ void* loaction_thread_func(void *arg)   //子线程：定位函数
     {        
 	char *a[2];
 	a[1]=(char *)"-e";
-        urg_demo.get_position(2, a);printf("get_position\r\n");
+        urg_demo.get_position(2, a);//printf("get_position\r\n");
         //把信号量加1
         sem_post(&locat_sem);
     }
