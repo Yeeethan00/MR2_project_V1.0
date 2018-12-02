@@ -21,8 +21,13 @@ namespace qrk
     class Urg_func : public Urg_driver
     {
     private:
-        
-    public:    
+
+    public:
+        int a,b,c;
+        double d,e,f;
+        MR2Scan2Point M;
+        //Connection_information co_inf;
+        int init_change(int argc, const char*const argv[]);
         void print_data(const vector<long>& data, long time_stamp);
         int get_position(int argc, const char*const argv[]);//更新坐标
     };

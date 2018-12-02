@@ -12,11 +12,13 @@ using namespace qrk;
 void* loaction_thread_func(void *arg)   //子线程：定位函数
 {
     band_cpu(2);
+    char *a[2];
+    a[1]=(char *)"-e";
     Urg_func urg_demo;
+    urg_demo.init_change(2, a);
     while(!finish_flag)
     {        
-	char *a[2];
-	a[1]=(char *)"-e";
+
         urg_demo.get_position(2, a);//printf("get_position\r\n");
         //把信号量加1
         sem_post(&locat_sem);
