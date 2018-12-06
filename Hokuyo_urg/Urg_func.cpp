@@ -15,6 +15,7 @@ static float Pose_high[2]={5360,43480};
 static float Pose_mid[2]={400,43480};
 static float Pose_low[2]={2390,43480};
 float Position[2]={0,0};
+long crader_data[1081];
 
 int Urg_func::init_change(int argc, const char*const argv[])
 {
@@ -78,10 +79,11 @@ int Urg_func::get_position(int argc, const char*const argv[])
             return 1;
     }
 
-    //for(int j = 0; j < data.size(); ++j)
-    //{
-	//    cout<<data[j]<<" ";
-    //}
+    for(int j = 0; j < data.size(); ++j)
+    {
+	    //cout<<data[j]<<" ";
+        crader_data[j]=data[j];
+    }
 
     //cout<<"test"<<endl;
 #if 1

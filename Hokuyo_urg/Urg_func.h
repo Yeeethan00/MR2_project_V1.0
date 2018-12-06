@@ -15,6 +15,7 @@
 using namespace std;
 
 extern float Position[2];
+extern long crader_data[1081];
 
 namespace qrk
 {

@@ -1,5 +1,7 @@
 #include "MR2_scan2point.h"
 
+long abc[1081];
+
 double MR2Scan2Point::Max_Of_Three(double a,double b,double c)
 {
 	double tmp = a > b ? a : b;
@@ -182,6 +184,7 @@ int MR2Scan2Point::Renew_Lastpos()
 					}
 				}
 				firstPosIn = 0;
+				/*
 				if(lastI < searchRange_min)
 				{
 					lastI = searchRange_min;
@@ -191,7 +194,7 @@ int MR2Scan2Point::Renew_Lastpos()
 				{
 					lastJ = searchRange_max;
 					break;
-				}
+				}*/
 				Save_to_memory(lastI,lastJ,cnt,posNum++);
 			}
 			else
@@ -221,6 +224,7 @@ int MR2Scan2Point::Renew_Lastpos()
 				}
 				if((array[lastJ] >= minDis && array[lastJ] <= maxDis) && (array[j] < minDis || array[j] > maxDis))
 				{
+					/*
 					if(lastI < searchRange_min)
 					{
 						lastI = searchRange_min;
@@ -231,6 +235,7 @@ int MR2Scan2Point::Renew_Lastpos()
 						lastJ = searchRange_max;
 						break;
 					}
+					 */
 					Save_to_memory(bgnj,lastJ,cnt,posNum++);
 				}
 				lastI = i--;
@@ -288,13 +293,14 @@ int MR2Scan2Point::Renew_Lastpos()
 	{
 		return -1;
 	}
+	/*
 	if(memory[found].angle[0]>=searchRange_max||memory[found].angle[1]>=searchRange_max||memory[found].angle[2]>=searchRange_max) {
 		lastSign = memory[lastfound];
 	}
 	else
-	{
+	{*/
 		lastSign = memory[found];//��ֵ
-	}
+	//}
 
 	//������ҽ��
 	/*
@@ -308,12 +314,17 @@ int MR2Scan2Point::Renew_Lastpos()
 	 */
 	for(int j = 0; j < 3; j++)
 	{
+
 		if(lastSign.angle[j]>=searchRange_max) {
-			cout << "error" << " ";
+			for(int i=0;i<1081;i++)
+			{
+				cout<<abc[i]<<",  ";
+			}
 		}
 		else
 		{
 			cout<<"ANG= "<<lastSign.angle[j]<<" ";
+			cout<<"LEN= "<<lastSign.pointLen[j]<<" ";
 		}
 
 	}
@@ -330,6 +341,10 @@ void MR2Scan2Point::Init_Lastpos(int posLen[3], long distance[3], int angle[3])
 }
 int MR2Scan2Point::POS_3_COLUMN(long *data, int num, int bgn, int end)
 {
+	for(int i=0;i<num;i++)
+	{
+		abc[i]=data[i];
+	}
 	if(num > ARRAY_LEN - 1)
 	{
 		searchposNum = ARRAY_LEN - 1;

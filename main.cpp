@@ -18,12 +18,12 @@ using namespace qrk;
     printf("start\r\n");
     //初始化信号量
     sem_all_init();
+    /*示波线程*/
+    gui_thread_create();
     /*CAN发送线程*/
     can_snd_thread_create();
     /*定位线程*/
     loaction_thread_create();
-    /*示波线程*/
-    gui_thread_create();
     /*决策线程*/
     decision_thread_create();
     /*CAN接收*/

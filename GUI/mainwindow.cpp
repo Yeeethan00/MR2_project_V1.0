@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
        m_series->append(i,0);
     }
     m_series->setUseOpenGL(true);//openGl 加速
-    qDebug()<<m_series->useOpenGL();
+    //qDebug()<<m_series->useOpenGL();
 printf("ser\r\n");
     m_series_1 = new QLineSeries;
     m_chart->addSeries(m_series_1);

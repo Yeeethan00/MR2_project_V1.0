@@ -294,15 +294,6 @@ void sprint_canframe(char *buf , struct canfd_frame *cf, int sep, int maxdlen) {
 	buf[offset] = 0;
 }
 /*MY CODES START*/
-/*************************************************************************
-	> File Name: tt.cpp
-	> Author: 
-	> Mail: 
-	> Created Time: 2018年11月22日 星期四 20时11分37秒
- ************************************************************************/
-
-#include <stdio.h>
-#include <string.h>
 typedef union{
    char ch[8];
    double in;
