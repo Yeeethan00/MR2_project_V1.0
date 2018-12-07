@@ -14,28 +14,6 @@
 #define HIP_HEIGHT 0.35
 using namespace std;
 
-typedef union{
-    int in[2];
-    double dou;
-}int2_to_double;
-void can_double2char(double dou, char *ch)
- {
- 	int2_to_double un;		
- 	un.dou=dou;
- 	for(int i=1;i<3;i++)
- 	{
- 		for(int j=1;j<9;j=j+2)
- 		{
- 			int temp=((un.in[2-i]>>(64-4*j))&0x0000000f);
- 			if(temp<10)	ch[27-8*i-j]=temp+48;
-			else	ch[27-8*i-j]=temp+87;
-			int temp_1=((un.in[2-i]>>(64-4*(j+1)))&0x0000000f);
-			if(temp_1<10)	ch[28-8*i-j]=temp_1+48;
-			else	ch[28-8*i-j]=temp_1+87;
-		}
-	}
- }
-
 Limbs::Limbs()
 {
     this->leg_LF.leg_type=LF;
@@ -94,19 +72,12 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
     }
     if(leg->leg_type==RF)
     {
-	GUI_show_data=(double)leg->angle_hip;
-	char msg_hip_side[20] ={'0','0','3','#'};
-        can_double2char((double)leg->angle_hip_side, msg_hip_side);
-        handle(msg_hip_side);
-        char msg_hip[20] ={'0','0','2','#'};
-        can_double2char((double)leg->angle_hip, msg_hip);
-        handle(msg_hip);
-        char msg_knee[20] ={'0','0','1','#'};
-        can_double2char((double)leg->angle_knee, msg_knee);
-        handle(msg_knee);
+	    GUI_show_data=(double)leg->angle_hip;
+        can_send_msg(0x003, leg->angle_hip_side);
+        can_send_msg(0x004, leg->angle_hip);
+        can_send_msg(0x005, leg->angle_knee);
         printf("x: %lf, y %lf , z:%lf\n", leg->track_x,leg->track_y,leg->track_z);
         printf("leg_type:%d  angle:%lf  %lf  %lf \n",leg->leg_type,leg->angle_hip_side,leg->angle_hip,leg->angle_knee);
-
     }
     if(leg->leg_type==LB)
     {
@@ -119,7 +90,7 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
         printf("x: %lf, y %lf , z:%lf\n", leg->track_x,leg->track_y,leg->track_z);
         printf("leg_type:%d  angle:%lf  %lf  %lf \n",leg->leg_type,leg->angle_hip_side,leg->angle_hip,leg->angle_knee);
     }
-    usleep(1000);
+    usleep(50000);
 }
 
 void Limbs::Limbs_move(double stepSize, double height, double angle_turn)

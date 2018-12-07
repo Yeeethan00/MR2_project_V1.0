@@ -21,14 +21,14 @@ using namespace qrk;
     /*示波线程*/
     gui_thread_create();
     /*CAN发送线程*/
-    //can_snd_thread_create();
+    can_snd_thread_create();
     /*定位线程*/
     loaction_thread_create();
     /*决策线程*/
-    //decision_thread_create();
+    decision_thread_create();
     /*CAN接收*/
-    //can_recv_create();
-    while(1){;}//测试进程
+    can_recv_create();
+    //while(1){;}//测试进程
     //删除信号量
     sem_all_destory();
     return 0;

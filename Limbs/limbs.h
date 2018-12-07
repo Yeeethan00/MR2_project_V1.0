@@ -15,7 +15,7 @@ extern "C" {
 }
 
 #define PI 3.1415926535
-#define LOOP_NUM 400
+#define LOOP_NUM 20
 typedef enum Leg_type{
     LF=0,
     RF,

@@ -19,7 +19,7 @@ QChart *m_chart;
 QLineSeries *m_series;
 QLineSeries *m_series_1;
 //QList<double> dataList;//存储业务数据
-int maxSize = 5000;
+int maxSize = 10000;
 //QTimer updateTimer;
 int timeId;
 MainWindow::MainWindow(QWidget *parent) :
@@ -41,9 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_series = new QLineSeries;
     m_chart->addSeries(m_series);
 
-    for(int i=0;i<maxSize;++i){
-       m_series->append(i,0);
-    }
+    //for(int i=0;i<maxSize;++i){
+    //   m_series->append(i,0);
+    //}
     m_series->setUseOpenGL(true);//openGl 加速
     //qDebug()<<m_series->useOpenGL();
 
@@ -51,7 +51,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_chart->addSeries(m_series_1);
 
     for(int i=0;i<maxSize;++i){
-       m_series_1->append(i,0);
+        m_series->append(i,0);
+        m_series_1->append(i,0);
     }
     m_series_1->setUseOpenGL(true);//openGl 加速
     //qDebug()<<m_series_1->useOpenGL();
