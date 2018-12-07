@@ -16,7 +16,7 @@ CRadar::CRadar(QWidget *parent) : QWidget(parent)
     for(int i=0; i<1081; i++)
     {
         m_points<<QPoint();
-        m_pointsAlapha<<100;
+        m_pointsAlapha<<255;
     }
 
     //启动定时器
@@ -44,7 +44,7 @@ void CRadar::paintEvent(QPaintEvent *event)
     painter.drawEllipse(m_drawArea.center(),len/2,len/2);
     painter.drawEllipse(m_drawArea.center(),len/3,len/3);
     painter.drawEllipse(m_drawArea.center(),len/6,len/6);
-
+/*
     //转动部分
         //---//线
     qreal x = m_drawArea.center().x() + (qreal)len/2 * cos(-m_pieRotate*3.14159/180);
@@ -61,12 +61,15 @@ void CRadar::paintEvent(QPaintEvent *event)
     painter.setBrush(QBrush(gradient));
     painter.setPen(Qt::NoPen);
     painter.drawPie(m_drawArea,m_pieRotate*16,90*16);
-
-    //装饰-随机点
+*/
+    //点
     for(int i = 0; i < m_points.count(); ++i)
     {
         int colorAlaph = m_pointsAlapha.at(i);
-        painter.setPen(QPen(QColor(255,255,255,colorAlaph),3));
+        if((i==crader_data_find[0])||(i==crader_data_find[1])||(i==crader_data_find[2]))
+            painter.setPen(QPen(QColor(255,0,0,colorAlaph),6));
+        else
+            painter.setPen(QPen(QColor(255,255,255,colorAlaph),2));
         painter.drawPoint(m_points.at(i));
     }
     //更详细解释参考：http://fearlazy.com/index.php/post/31.html
@@ -91,23 +94,25 @@ void CRadar::timerEvent(QTimerEvent *event)
 {
     if(m_timerId == event->timerId())
     {
-        m_pieRotate -= 10;
-        update();
+        //m_pieRotate -= 10;
+        //update();
     }
     else if(m_pointTimerId == event->timerId())
     {
         //随机更换装饰的点
         for(int i = 0; i < m_points.count(); ++i)
         {
-            long r = crader_data[i]*m_drawArea.width()/(2*5535);
+            long r = crader_data[i]*m_drawArea.width()/(2*553);
+            //r=100;
             //qDebug()<<i<<" "<<crader_data[i]<<""<<r;
-            int offsetX = r*cos(5*PI/4-PI*i/720)+m_drawArea.width()/2;//rand()%m_drawArea.width();
-            int offsetY = r*sin(5*PI/4-PI*i/720)+m_drawArea.width()/2;//rand()%m_drawArea.width();
+            int offsetX = -r*cos(5*PI/4-PI*i/720)+m_drawArea.width()/2;//rand()%m_drawArea.width();
+            int offsetY = -r*sin(5*PI/4-PI*i/720)+m_drawArea.width()/2;//rand()%m_drawArea.width();
             //qDebug()<<"x "<<offsetX<<"y "<<offsetY;
-            qDebug()<<i<<"jiao"<<5*PI/4-PI*i/720;
-            //int alapha = rand()%255;
+            //qDebug()<<i<<"jiao"<<5*PI/4-PI*i/720;
+            //int alapha = 255;
             m_points.replace(i,QPoint(offsetX,offsetY) + m_drawArea.topLeft());
             //m_pointsAlapha.replace(i,alapha);
+
         }
         update();
     }

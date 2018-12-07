@@ -17,8 +17,6 @@ FIND_PACKAGE(Qt5Core REQUIRED)
 FIND_PACKAGE(Qt5OpenGL REQUIRED)
 qt5_wrap_cpp( MOC mainwindow.h) 
 qt5_wrap_ui( UIC mainwindow.ui)
-qt5_wrap_cpp( MOC widget.h)
-qt5_wrap_ui( UIC widget.ui)
 
 #set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} $ENV{HOME}/freenect2/lib/cmake/freenect2 ) 
 #find_package(freenect2 REQUIRED) 
@@ -42,7 +40,7 @@ add_subdirectory(Utils)
 add_subdirectory(GUI)
 
 add_executable(MR2_project_V1 ${SRCS} ./GUI/gui_main.cpp ./GUI/gui_main.h ./GUI/mainwindow.cpp ./GUI/mainwindow.h ./GUI/mainwindow.ui
-               ./GUI/cradar.cpp ./GUI/cradar.h ./GUI/widget.cpp ./GUI/widget.h ./GUI/widget.ui ${RESOURCE_DIR})
+               ./GUI/cradar.cpp ./GUI/cradar.h ${RESOURCE_DIR})
 
 target_link_libraries(MR2_project_V1 #${freenect2_LIBRARIES} ${OpenCV_LIBS}
 				     users hokuyo_urg #kinectv2 

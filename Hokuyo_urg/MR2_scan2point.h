@@ -15,36 +15,36 @@ typedef struct
 {
 	int pointLen[3];
 	double distance[3];
-	int angle[3];
+	float angle[3];
 	double p;
 }Sign;
 
 class MR2Scan2Point
 {
 	public:
-		MR2Scan2Point();//¹¹Ôìº¯Êı,ÓÃÓÚ³õÊ¼»¯ 
+		MR2Scan2Point();//ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½,ï¿½ï¿½ï¿½Ú³ï¿½Ê¼ï¿½ï¿½ 
 		/**
-		@brief  É¨ÃèµãµÄÖ´ĞĞº¯Êı£¬Ê¹ÓÃÇ°ĞèÒªµ÷ÓÃInit_Lastpos³õÊ¼»¯º¯Êı 
-		@param  dataÎªÊäÈëÊı×é£¬numÎªÊı×é³¤¶È£¬bgnºÍendÎªËÑË÷·¶Î§ 
+		@brief  É¨ï¿½ï¿½ï¿½ï¿½Ö´ï¿½Ğºï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ç°ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Init_Lastposï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+		@param  dataÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é£¬numÎªï¿½ï¿½ï¿½é³¤ï¿½È£ï¿½bgnï¿½ï¿½endÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î§ 
 		*/
 		int POS_3_COLUMN(long *data, int num, int bgn, int end);
 		 /**
-		@brief  ³õÊ¼»¯µÚÒ»´Î²ÉÑù£¬ÔÚ¶ÔÏó¸Õ´´½¨µÄÊ±ºòµ÷ÓÃ£¬ÒÔºóÔÙ´ÎÉ¨Ãè¹¹³Éµü´ú²»ĞèÒªµ÷ÓÃ 
-		@param  posLenÎªÈı¸öµãµÄ³õÊ¼µã¿í£¬distanceÎªÈı¸öµãµÄ¾àÀë£¬angleÎªÈı¸öµãµÄ½Ç¶È 
+		@brief  ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ò»ï¿½Î²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½Õ´ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½Ôºï¿½ï¿½Ù´ï¿½É¨ï¿½è¹¹ï¿½Éµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ 
+		@param  posLenÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½Ê¼ï¿½ï¿½ï¿½distanceÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ë£¬angleÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½Ç¶ï¿½ 
 		*/
 		void Init_Lastpos(int posLen[3], long distance[3], int angle[3]);
 		/*
-		*fr£¬sc,trPointÎªÊä³öµÄÈı¸öµãÎ»ÖÃ £¨°´ÊäÈëÊı×éË³Ğò£©£¬DisÎªÊä³öÈı¸öµã¾àÀë 
+		*frï¿½ï¿½sc,trPointÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½ò£©£ï¿½DisÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		*/
 		void RetValue(int &frPoint, int &scPoint, int &trPoint, double &frDis, double &scDis, double &trDis);
 		/*
-		*@brief ¹ıÂËÉ¢µã
-		@param lenÎªÉ¢µãµÄµã¿í£¨²»ÒË¹ı³¤£© rateÎªÅĞ¶ÏÉ¢µãÏà¶ÔÓÚÕı³£µãµÄ²îÖµ 
+		*@brief ï¿½ï¿½ï¿½ï¿½É¢ï¿½ï¿½
+		@param lenÎªÉ¢ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½ rateÎªï¿½Ğ¶ï¿½É¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½Öµ 
 		*/
 		void filter(int len, double rate); 
 	private:
 		double array[ARRAY_LEN];
-		int searchposNum;//ÊäÈëµÄµãµÄÊıÁ¿ 
+		int searchposNum;//ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		double disRange_min;
 		double disRange_max;
 		int searchRange_min;

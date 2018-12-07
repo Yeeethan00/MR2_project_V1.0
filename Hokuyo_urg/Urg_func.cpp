@@ -16,6 +16,7 @@ static float Pose_mid[2]={400,43480};
 static float Pose_low[2]={2390,43480};
 float Position[2]={0,0};
 long crader_data[1081];
+int crader_data_find[3];
 
 int Urg_func::init_change(int argc, const char*const argv[])
 {
@@ -119,9 +120,13 @@ int Urg_func::get_position(int argc, const char*const argv[])
 	}
     //d,e,f按方位从小到大排序了	红方f最底下
 	//计算坐标:红方
+    crader_data_find[0]=a;
+    crader_data_find[1]=b;
+    crader_data_find[2]=c;
 	float r_high=d;
    	float r_mid=e;
     float r_low=f;
+    //cout<<a<<"  "<<b<<"  "<<c;
     cout<<"r_high: "<<r_high;cout<<"  r_mid: "<<r_mid;cout<<"  r_low: "<<r_low<<endl;
     //计算位置
     float Point_x_1=0.5*((r_high*r_high-r_mid*r_mid)/(Pose_mid[0]-Pose_high[0])+Pose_mid[0]+Pose_high[0]);

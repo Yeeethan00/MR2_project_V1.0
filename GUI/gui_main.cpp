@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "widget.h"
 #include <QApplication>
 #include "gui_main.h"
 
@@ -10,8 +9,8 @@ int gui_main()
     QApplication a((int&)d, az);
     MainWindow w;
     w.show();
-    Widget w1;
-    w1.show();
+    //Widget w1;
+    //w1.show();
 
     return a.exec();
 }

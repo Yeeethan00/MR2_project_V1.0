@@ -10,6 +10,8 @@
 #include "QPointF"
 #include "QDebug"
 
+#include "cradar.h"
+
 //#include <QtCharts/QChartGlobal>
 #include "QChartView"
 QT_CHARTS_USE_NAMESPACE
@@ -26,6 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    CRadar* radar = new CRadar(this);
+    radar->setFixedSize(300,300);
+    //radar->move(50,50);
+
     m_chart = new QChart;
     QChartView *chartView = new QChartView(m_chart);
 //    v.setRubberBand(QChartView::HorizontalRubberBand);
@@ -40,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     m_series->setUseOpenGL(true);//openGl 加速
     //qDebug()<<m_series->useOpenGL();
-printf("ser\r\n");
+
     m_series_1 = new QLineSeries;
     m_chart->addSeries(m_series_1);
 
@@ -48,7 +54,7 @@ printf("ser\r\n");
        m_series_1->append(i,0);
     }
     m_series_1->setUseOpenGL(true);//openGl 加速
-    qDebug()<<m_series_1->useOpenGL();
+    //qDebug()<<m_series_1->useOpenGL();
 
 
     QValueAxis *axisX = new QValueAxis;
@@ -65,10 +71,12 @@ printf("ser\r\n");
     m_chart->setAxisX(axisX,m_series_1);
     m_chart->setAxisY(axisY,m_series_1);
     m_chart->legend()->hide();
-    m_chart->setTitle("demo");
+    m_chart->setTitle("wave");
 
     QVBoxLayout *layout = ui->verticalLayout;
     layout->addWidget(chartView);
+    layout->addWidget(radar);
+
 
 //    connect(&updateTimer,SIGNAL(timeout()),this,SLOT(updatedataSlot()));
 //    updateTimer.start(0);
@@ -95,7 +103,7 @@ void MainWindow::timerEvent(QTimerEvent *event){
         static int lastpointtime = 0;
         int size = (eltime - lastpointtime);//数据个数
         //size=1;
-        qDebug()<<"size-->"<<size;
+        //qDebug()<<"size-->"<<size;
         if(isVisible()){
             QVector<QPointF> oldPoints = m_series->pointsVector();//Returns the points in the series as a vector
             QVector<QPointF> points;
