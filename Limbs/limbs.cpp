@@ -73,9 +73,10 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
     if(leg->leg_type==RF)
     {
 	    GUI_show_data=(double)leg->angle_hip;
-        can_send_msg(0x003, leg->angle_hip_side);
-        can_send_msg(0x004, leg->angle_hip);
-        can_send_msg(0x005, leg->angle_knee);
+        char str_snd[20] ={'0','0','0','#'};char str_snd1[20] ={'0','0','0','#'};char str_snd2[20] ={'0','0','0','#'};
+        can_send_msg(0x003, leg->angle_hip_side, str_snd);
+        can_send_msg(0x004, leg->angle_hip, str_snd1);
+        can_send_msg(0x005, leg->angle_knee, str_snd2);
         printf("x: %lf, y %lf , z:%lf\n", leg->track_x,leg->track_y,leg->track_z);
         printf("leg_type:%d  angle:%lf  %lf  %lf \n",leg->leg_type,leg->angle_hip_side,leg->angle_hip,leg->angle_knee);
     }

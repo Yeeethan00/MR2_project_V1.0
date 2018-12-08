@@ -154,9 +154,9 @@ void can_recv_callback(CanRxMsg *pRxMsg)
 {
     CAN_LIST_MATCH(pRxMsg->stdId, pRxMsg);
 }
-int can_send_msg(int ID, double df_snd)
+int can_send_msg(int ID, double df_snd, char* str_snd)
 {
-    char str_snd[20] ={'0','0','0','#'};
+
     str_snd[2]=ID&0x0000000f;
     str_snd[1]=(ID&0x000000f0)>>4;
     str_snd[0]=(ID&0x00000f00)>>8;

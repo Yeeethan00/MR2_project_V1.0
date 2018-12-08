@@ -44,7 +44,7 @@ void can_double2char(double dou, char *ch);
 void can_rcv_char(char* buf, CanRxMsg *Can_Rx_Msg);
 void can_recv_callback(CanRxMsg *Can_Rx_Msg);
 void can_add_func(void);
-int can_send_msg(int ID, double df_snd);
+int can_send_msg(int ID, double df_snd, char* str_snd);
 
 int callback(CanRxMsg *pRxMsg);
 #endif // _CAN_H_
