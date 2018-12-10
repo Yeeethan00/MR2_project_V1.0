@@ -33,18 +33,20 @@ qt5_wrap_ui( UIC mainwindow.ui)
 
 add_subdirectory(Users)
 add_subdirectory(Hokuyo_urg)
-add_subdirectory(KinectV2)
+#add_subdirectory(KinectV2)
 add_subdirectory(Limbs)
 add_subdirectory(Can)
 add_subdirectory(Utils)
 add_subdirectory(GUI)
+add_subdirectory(CPGNetWork)
 
 add_executable(MR2_project_V1 ${SRCS} ./GUI/gui_main.cpp ./GUI/gui_main.h ./GUI/mainwindow.cpp ./GUI/mainwindow.h ./GUI/mainwindow.ui
                ./GUI/cradar.cpp ./GUI/cradar.h ${RESOURCE_DIR})
 
 target_link_libraries(MR2_project_V1 #${freenect2_LIBRARIES} ${OpenCV_LIBS}
 				     users hokuyo_urg #kinectv2 
-                     limbs pthread can utils #gui
+                     		     limbs pthread can utils #gui
+				     cpgnetwork
 				     Qt5::Widgets  Qt5::Charts  Qt5::Gui  Qt5::Core  Qt5::OpenGL)
 
 include(CheckCXXCompilerFlag)

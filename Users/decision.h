@@ -18,6 +18,7 @@
 #include "../Limbs/limbs.h"
 #include "../Utils/sem.h"
 extern "C" {
+#include "../CPGNetWork/CPG_gait.h"
 #include "../Can/can.h"
 #include "../Utils/band_cpu.h"
 }
