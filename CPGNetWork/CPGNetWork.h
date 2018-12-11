@@ -16,7 +16,6 @@
 #include "rt_nonfinite.h"
 #include "rtwtypes.h"
 #include "CPGNetWork_types.h"
-#include "../Utils/sem.h"
 
 /*typedef*/
 typedef enum {
@@ -25,7 +24,6 @@ typedef enum {
 }joint_type;
 
 /*global */
-extern joint_type joint_type_phi;
 extern double theta0;
 extern double beta;
 extern int phiRB, phiLB;
@@ -37,10 +35,7 @@ extern double joint_angle[16];
 extern double osc_x[16];
 
 /* Function Declarations */
-extern void CPGNetWork(double acc_roll, double slope_alpha, double v, double T,
-  double osc_x[16], double tfinal, double phi, double theta0, double beta,
-  int phiRB, int phiLB, int alpha, int a, double k1, double k2,
-  double joint_angle[16]);
+void CPGNetWork(double acc_roll, double slope_alpha, double v, double T, double tfinal, double phi);
 
 #endif
 

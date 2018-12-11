@@ -14,36 +14,52 @@ void* decision_thread_func(void *Position)   //子线程：决策函数
 {
     band_cpu(0);
     Limbs limbs_demo;
+#ifdef TRACK
     double stepSize=0.1;
     double height=0.1;	
     double angle_turn=0.1;
+#endif
     float *pos;
 	while(1){
-	    switch(status)
-	    {
-	    case 0:
-	        {  
-	        stepSize=0.1;
-                height=0.1;	
-	        angle_turn=0.0;
-                limbs_demo.Limbs_move(stepSize, height, angle_turn);
+	    switch(status){
+	    case 0:{
+#ifdef TRACK
+				/*TRACK MOVE*/
+	        	stepSize=0.1;
+                height=0.1;
+	        	angle_turn=0.758;
+                limbs_demo.Limbs_track_move(stepSize, height, angle_turn);
+#endif
+#ifdef CPG
+				/*CPG MOVE*/
+				double v = 1;
+				limbs_demo.Limbs_CPG_move(v);
+				cout<<"move"<<endl;
+#endif
                 //把信号量减1
-	            sem_wait(&locat_sem);
+	            //sem_wait(&locat_sem);
 	            pos = (float *)Position;
-	            if(pos[0]==pos[1])//判断
+	            if(pos[0]==pos[1]+15151)//判断
 	            {
 	                status=1;
 	            }
 	            printf("status%d\r\n",status);
 	            break;
 	        }
-	    case 1:
-	        {
-	        stepSize=0.1;
+	    case 1:{
+#ifdef TRACK
+	        	/*TRACK MOVE*/
+	        	stepSize=0.1;
                 height=0.1;	
-	        angle_turn=0.758;
-                limbs_demo.Limbs_move(stepSize, height, angle_turn);
-                //把信号量减1
+	        	angle_turn=0.758;
+                limbs_demo.Limbs_track_move(stepSize, height, angle_turn);
+#endif
+#ifdef CPG
+                /*CPG MOVE*/
+				double v = 1;
+				limbs_demo.Limbs_CPG_move(v);
+#endif
+				//把信号量减1
 	            sem_wait(&locat_sem);
 	            pos =  (float *)Position;
 	            if(pos[0]==pos[1])//判断
@@ -53,12 +69,19 @@ void* decision_thread_func(void *Position)   //子线程：决策函数
 	            printf("status%d\r\n",status);
 	            break;
 	        }
-	    case 2:
-	        {
-	        stepSize=0.1;
-                height=0.1;	
-	        angle_turn=0.758;
-                limbs_demo.Limbs_move(stepSize, height, angle_turn);
+	    case 2:{
+#ifdef TRACK
+				/*TRACK MOVE*/
+	        	stepSize=0.1;
+                height=0.1;
+	        	angle_turn=0.758;
+                limbs_demo.Limbs_track_move(stepSize, height, angle_turn);
+#endif
+#ifdef CPG
+				/*CPG MOVE*/
+				double v = 1;
+				limbs_demo.Limbs_CPG_move(v);
+#endif
                 //把信号量减1
 	            sem_wait(&locat_sem);
 	            pos =  (float *)Position;
@@ -69,8 +92,7 @@ void* decision_thread_func(void *Position)   //子线程：决策函数
 	            printf("status%d\r\n",status);
 	            break;
 	        }
-	    case 3:
-	        {
+	    case 3:{
 	            finish_flag=1;
 	            printf("status%d\r\n",status);
 	            //退出线程

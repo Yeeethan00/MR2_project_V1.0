@@ -11,6 +11,7 @@
 #include<math.h>
 #include "../Utils/sem.h"
 extern "C" {
+#include "../CPGNetWork/CPG_gait.h"
 #include "../Can/can.h"
 }
 
@@ -46,7 +47,8 @@ class Limbs
         void leg_control(Leg_states *leg, double tim ,double stepSize, double height, double angle_alpha, int leg_dir);
     public:
         Limbs();
-        void Limbs_move(double stepSize, double height, double angle_turn);
+        void Limbs_track_move(double stepSize, double height, double angle_turn);
+        void Limbs_CPG_move(double v);
         
 };
 

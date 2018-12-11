@@ -41,20 +41,12 @@
  * Arguments    : void
  * Return Type  : void
  */
-void main_CPGNetWork(void)
+void CPGNetWork_gait(double v, double T, double tfinal)
 {
   double acc_roll=0;
   double slope_alpha=0;
-  //步态参数
-  double T = 0.4;                        //运动周期 m
-  double v = 1;                          //运动速度  m/s
-  double tfinal = 0.001;                         //响应时间域（Time region of response）
 
-  for(int i = 1; i<100*T/tfinal; i++){
-    CPGNetWork(acc_roll,  slope_alpha,  v,  T, osc_x,  tfinal,  joint_type_phi,  theta0,  beta,
-     phiRB,  phiLB,  alpha,  a,  k1, k2, joint_angle);
-
-  }
+    CPGNetWork(acc_roll,  slope_alpha,  v,  T, tfinal,  phi_elbow);
 }
 
 /*

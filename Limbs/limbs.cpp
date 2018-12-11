@@ -21,7 +21,7 @@ Limbs::Limbs()
     this->leg_RF.leg_type=RF;
     this->leg_RB.leg_type=RB;
 }
-
+/*TRACK MOVE*/
 void Limbs::track2states(Leg_states *leg)
 {
     leg->track_z1=sqrt(leg->track_y*leg->track_y+leg->track_z*leg->track_z);
@@ -30,7 +30,6 @@ void Limbs::track2states(Leg_states *leg)
     leg->angle_hip=PI/2-asin(L2*sin(leg->angle_knee)/sqrt(leg->track_x*leg->track_x+leg->track_z1*leg->track_z1))+atan(leg->track_x/leg->track_z1);
     leg->angle_hip_side=atan(leg->track_y/leg->track_z);
 }
-
 void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double height, double angle_alpha, int leg_dir)
 {
     double period=LOOP_NUM/LOOP_NUM;
@@ -72,7 +71,7 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
     }
     if(leg->leg_type==RF)
     {
-	    GUI_show_data=(double)leg->angle_hip;
+	    GUI_show_data=leg->angle_hip;
         char str_snd[20] ={'0','0','0','#'};char str_snd1[20] ={'0','0','0','#'};char str_snd2[20] ={'0','0','0','#'};
         can_send_msg(0x003, leg->angle_hip_side, str_snd);
         can_send_msg(0x004, leg->angle_hip, str_snd1);
@@ -93,8 +92,7 @@ void Limbs::leg_control(Leg_states *leg, double tim ,double stepSize, double hei
     }
     usleep(50000);
 }
-
-void Limbs::Limbs_move(double stepSize, double height, double angle_turn)
+void Limbs::Limbs_track_move(double stepSize, double height, double angle_turn)
 {
     int leg_dir;
     double angle_t;
@@ -114,6 +112,40 @@ void Limbs::Limbs_move(double stepSize, double height, double angle_turn)
         leg_control(&this->leg_LB, i, stepSize, height,angle_t,leg_dir);
         leg_control(&this->leg_RF, i, stepSize, height,angle_t,leg_dir);
         leg_control(&this->leg_RB, i, stepSize, height,angle_t,leg_dir);
+    }
+}
+
+
+/*CPG MOVE*/
+void Limbs::Limbs_CPG_move(double v){
+    //步态参数
+    double T = 0.2;                        //运动周期 m
+    double tfinal = 0.001;                         //响应时间域（Time region of response）
+    for(int i = 1; i<T/tfinal; i++) {
+
+        CPGNetWork_gait(v, T, tfinal);
+        /*legs*/
+        //LF
+        this->leg_LF.angle_hip = joint_angle[0];
+        this->leg_LF.angle_knee = joint_angle[1];
+        this->leg_LF.angle_hip_side = joint_angle[8];
+        //RF
+        this->leg_RF.angle_hip = joint_angle[2];
+        this->leg_RF.angle_knee = joint_angle[3];
+        this->leg_RF.angle_hip_side = joint_angle[10];
+        //RB
+        this->leg_RB.angle_hip = joint_angle[4];
+        this->leg_RB.angle_knee = joint_angle[5];
+        this->leg_RB.angle_hip_side = joint_angle[12];
+        //LB
+        this->leg_LB.angle_hip = joint_angle[6];
+        this->leg_LB.angle_knee = joint_angle[7];
+        this->leg_LB.angle_hip_side = joint_angle[14];
+
+        //show
+
+        GUI_show_data = this->leg_LF.angle_hip;
+        GUI_show_data_1 = this->leg_LF.angle_knee;
     }
 }
 

@@ -40,9 +40,11 @@
 #include "rt_nonfinite.h"
 #include "rtwtypes.h"
 #include "CPGNetWork_types.h"
+#include "CPGNetWork.h"
+#include "../Utils/sem.h"
 
 /* Function Declarations */
-void main_CPGNetWork(void);
+void CPGNetWork_gait(double v, double T, double tfinal);
 
 #endif
 

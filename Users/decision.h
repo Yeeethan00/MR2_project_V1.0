@@ -7,6 +7,9 @@
 
 #ifndef _DECISION_H
 #define _DECISION_H
+
+#define CPG
+
 #include <iostream>
 #include <unistd.h>
 #include <stdlib.h>
@@ -18,7 +21,6 @@
 #include "../Limbs/limbs.h"
 #include "../Utils/sem.h"
 extern "C" {
-#include "../CPGNetWork/CPG_gait.h"
 #include "../Can/can.h"
 #include "../Utils/band_cpu.h"
 }

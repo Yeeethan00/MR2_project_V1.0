@@ -59,10 +59,8 @@ double osc_x[16]={0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}; //���
  *                double joint_angle[16]
  * Return Type  : void
  */
-void CPGNetWork(double acc_roll, double slope_alpha, double v, double T, double
-                osc_x[16], double tfinal, double phi, double theta0, double beta,
-                int phiRB, int phiLB, int alpha, int a, double k1,
-                double k2, double joint_angle[16])
+void CPGNetWork(double acc_roll, double slope_alpha, double v, double T,
+                double tfinal, double phi)
 {
   double omiga_sw;
   double h;
@@ -168,13 +166,12 @@ void CPGNetWork(double acc_roll, double slope_alpha, double v, double T, double
       }
   }
 
-  /*
+/*
   cfprintf(joint_angle[0], joint_angle[1], joint_angle[8]);//LF
   b_cfprintf(joint_angle[2], joint_angle[3], joint_angle[10]);//RF
   c_cfprintf(joint_angle[4], joint_angle[5], joint_angle[12]);//RB
   d_cfprintf(joint_angle[6], joint_angle[7], joint_angle[14]);//LB
-   */
-  //GUI_show_data=joint_angle[0];GUI_show_data_1=joint_angle[1];
+*/
   emxFree_real_T(&x);
 }
 

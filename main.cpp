@@ -29,7 +29,6 @@ using namespace qrk;
     /*CAN接收*/
     can_recv_create();
     //while(1){;}//测试进程
-    //main_CPGNetWork();//CPG测试
     //删除信号量
     sem_all_destory();
     return 0;
