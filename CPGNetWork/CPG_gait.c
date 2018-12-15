@@ -37,16 +37,16 @@
 #include "CPGNetWork_initialize.h"
 #include <stdio.h>
 
+double acc_roll=0;
+double slope_alpha=0;
+
 /*
  * Arguments    : void
  * Return Type  : void
  */
 void CPGNetWork_gait(double v, double T, double tfinal)
 {
-  double acc_roll=0;
-  double slope_alpha=0;
-
-    CPGNetWork(acc_roll,  slope_alpha,  v,  T, tfinal,  phi_elbow);
+     CPGNetWork(acc_roll,  slope_alpha,  v,  T, tfinal,  phi_elbow);
 }
 
 /*

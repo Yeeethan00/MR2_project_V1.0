@@ -43,6 +43,9 @@
 #include "CPGNetWork.h"
 #include "../Utils/sem.h"
 
+extern double acc_roll;
+extern double slope_alpha;
+
 /* Function Declarations */
 void CPGNetWork_gait(double v, double T, double tfinal);
 

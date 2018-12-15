@@ -5,6 +5,7 @@
 #include <sys/epoll.h>
 #include <pthread.h>
 #include "can.h"
+#include "../CPGNetWork/CPGNetWork.h"
 
 Cthread_sendworkqueue * sndqueue;   //ȫ�ַ��Ͷ��нṹ��
 char * interface = (char *)"can0";          //ָ���豸
@@ -172,6 +173,8 @@ int can_send_msg(int ID, double df_snd, char* str_snd)
     handle(str_snd);
 }
 
+
+/*CAN BUS CALLBACK*/
 int callback(CanRxMsg *pRxMsg)
 {
     can_msg Can_msg;
@@ -183,4 +186,26 @@ int callback(CanRxMsg *pRxMsg)
     GUI_show_data_1=Can_msg.df;
 
     return 1;
+}
+/*接收关节反馈ENCODER位置转换成osc_x_feedback*/
+void feedback_callback(CanRxMsg* pRxMsg)
+{
+    int i=pRxMsg->stdId&0x00000F;
+    double joint_angle_can_feedback;
+    can_msg Can_msg;
+    for(int j=0;j<8;j++)
+    {
+        Can_msg.ch[j]=pRxMsg->data[j];
+    }
+    double leg_joint_can_feedback=Can_msg.df;
+    //CHANGE  JOINT ANGEL TO OSC JOINT_ANGLE
+    if((i==0)||(i==2)||(i==4)||(i==6))
+        joint_angle_can_feedback=PI/2-theta0-leg_joint_can_feedback;
+    else if((i==1)||(i==3)||(i==5)||(i==7))
+        joint_angle_can_feedback=PI-theta0-leg_joint_can_feedback;
+    else
+        joint_angle_can_feedback=leg_joint_can_feedback;
+    //CHANGE  OSC JOINT_ANGLE TO OSC_X
+    if((joint_angle_can_feedback!=theta0)&&(joint_angle_can_feedback!=0))
+        osc_x_feedback[i]=joint_angle_can_feedback;
 }

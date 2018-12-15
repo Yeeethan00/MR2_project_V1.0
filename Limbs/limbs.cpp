@@ -126,20 +126,20 @@ void Limbs::Limbs_CPG_move(double v){
         CPGNetWork_gait(v, T, tfinal);
         /*legs*/
         //LF
-        this->leg_LF.angle_hip = joint_angle[0];
-        this->leg_LF.angle_knee = joint_angle[1];
+        this->leg_LF.angle_hip = PI/2-theta0-joint_angle[0];
+        this->leg_LF.angle_knee = PI-theta0-joint_angle[1];
         this->leg_LF.angle_hip_side = joint_angle[8];
         //RF
-        this->leg_RF.angle_hip = joint_angle[2];
-        this->leg_RF.angle_knee = joint_angle[3];
+        this->leg_RF.angle_hip = PI/2-theta0-joint_angle[2];
+        this->leg_RF.angle_knee = PI-theta0-joint_angle[3];
         this->leg_RF.angle_hip_side = joint_angle[10];
         //RB
-        this->leg_RB.angle_hip = joint_angle[4];
-        this->leg_RB.angle_knee = joint_angle[5];
+        this->leg_RB.angle_hip = PI/2-theta0-joint_angle[4];
+        this->leg_RB.angle_knee = PI-theta0-joint_angle[5];
         this->leg_RB.angle_hip_side = joint_angle[12];
         //LB
-        this->leg_LB.angle_hip = joint_angle[6];
-        this->leg_LB.angle_knee = joint_angle[7];
+        this->leg_LB.angle_hip = PI/2-theta0-joint_angle[6];
+        this->leg_LB.angle_knee = PI-theta0-joint_angle[7];
         this->leg_LB.angle_hip_side = joint_angle[14];
 
         //show
